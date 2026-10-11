@@ -1,0 +1,9 @@
+[
+    {
+        "Protocol": "TCP",
+        "Port": 27017,
+        "Ref": "MongoPort",
+        "Name": "MongoDB Port",
+        "Description": "MongoDB listen port. Bound to 127.0.0.1 (localhost only) — never expose this publicly. The Star Conflict instance connects to this port on the same host."
+    }
+]

@@ -1,0 +1,65 @@
+[
+    {
+        "UpdateStageName": "Create data directory",
+        "UpdateSourcePlatform": "All",
+        "UpdateSource": "CreateDirectory",
+        "UpdateSourceArgs": "{{$FullBaseDir}}data",
+        "SkipOnFailure": true
+    },
+    {
+        "UpdateStageName": "Download MongoDB 2.6.12 (Windows)",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-2.6.12.zip",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UpdateSourceArgs": "mongodb.zip",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": false,
+        "DeleteAfterExtract": true,
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Flatten MongoDB binaries (Windows)",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"$src = Get-ChildItem -Directory -Filter 'mongodb-win32-*' | Select-Object -First 1; if ($src) { Copy-Item -Recurse -Force ($src.FullName + '\\*') '.'; Remove-Item -Recurse -Force $src.FullName }\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Download MongoDB 2.6.12 (Linux)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "FetchURL",
+        "UpdateSourceData": "https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.12.tgz",
+        "UpdateSourceTarget": "{{$FullBaseDir}}",
+        "UpdateSourceArgs": "mongodb.tgz",
+        "UnzipUpdateSource": true,
+        "OverwriteExistingFiles": false,
+        "DeleteAfterExtract": true,
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Flatten MongoDB binaries (Linux)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"src=$(ls -d mongodb-linux-x86_64-* 2>/dev/null | head -1); if [ -n \\\"$src\\\" ]; then cp -rf \\\"$src\\\"/* . && rm -rf \\\"$src\\\"; fi\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Write mongod.cfg (Windows)",
+        "UpdateSourcePlatform": "Windows",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "powershell.exe",
+        "UpdateSourceArgs": "-NoProfile -Command \"if (-not (Test-Path 'mongod.cfg')) { Set-Content -Path 'mongod.cfg' -Value 'bind_ip = 127.0.0.1`nport = 27017' }\"",
+        "SkipOnFailure": false
+    },
+    {
+        "UpdateStageName": "Write mongod.cfg (Linux)",
+        "UpdateSourcePlatform": "Linux",
+        "UpdateSource": "Executable",
+        "UpdateSourceData": "/bin/bash",
+        "UpdateSourceArgs": "-c \"[ -f mongod.cfg ] || printf 'bind_ip = 127.0.0.1\\nport = 27017\\n' > mongod.cfg\"",
+        "SkipOnFailure": false
+    }
+]
