@@ -1,37 +1,26 @@
 [
     {
-        "Name": "Database",
-        "DisplayName": "Database",
-        "Description": "MongoDB connection settings consumed by Star Conflict services",
-        "Icon": "database",
-        "Colour": "#10B981",
-        "Fields": [
-            {
-                "FieldName": "bind_ip",
-                "ReadableName": "Bind Address",
-                "Description": "IP address MongoDB listens on. Keep this at 127.0.0.1 — MongoDB has no built-in authentication in 2.6.x and must never be exposed publicly.",
-                "Category": "Database",
-                "NodeRef": "Daemon:GenericModule.App.Settings.bind_ip",
-                "InputType": "Text",
-                "ValType": "String",
-                "DefaultValue": "127.0.0.1",
-                "Keywords": "bind ip address listen",
-                "Order": 1
-            },
-            {
-                "FieldName": "port",
-                "ReadableName": "MongoDB Port",
-                "Description": "TCP port MongoDB listens on. Must match what Star Conflict services expect (default 27017). Change only if you have a port conflict on the host.",
-                "Category": "Database",
-                "NodeRef": "Daemon:GenericModule.App.Settings.port",
-                "InputType": "Number",
-                "ValType": "Int",
-                "DefaultValue": "27017",
-                "MinValue": 1024,
-                "MaxValue": 65535,
-                "Keywords": "port mongodb database",
-                "Order": 2
-            }
-        ]
+        "DisplayName": "Bind Address",
+        "Category": "Star Conflict MongoDB:storage",
+        "Subcategory": "Database:dns:1",
+        "Description": "IP address MongoDB listens on. Keep at 127.0.0.1 — MongoDB 2.6.x has no authentication and must never be exposed publicly.",
+        "Keywords": "bind ip address listen",
+        "FieldName": "bind_ip",
+        "InputType": "text",
+        "ParamFieldName": "bind_ip",
+        "DefaultValue": "127.0.0.1",
+        "EnumValues": {}
+    },
+    {
+        "DisplayName": "MongoDB Port",
+        "Category": "Star Conflict MongoDB:storage",
+        "Subcategory": "Database:dns:1",
+        "Description": "TCP port MongoDB listens on. Must match what Star Conflict services expect (default 27017).",
+        "Keywords": "port mongodb database",
+        "FieldName": "port",
+        "InputType": "number",
+        "ParamFieldName": "port",
+        "DefaultValue": "27017",
+        "EnumValues": {}
     }
 ]
