@@ -27,7 +27,6 @@ Meta.BreakingReleaseNotes=
 Meta.AppConfigId=a95218b8-f7ca-4af9-908f-fdc03fe43331
 Meta.ImportableExtensions=[]
 Meta.AppIsMultiIPAware=False
-
 App.DisplayName=Star Conflict MongoDB
 App.RootDir=./star-conflict-mongodb/
 App.BaseDirectory=./star-conflict-mongodb/
@@ -89,7 +88,6 @@ App.MonitorDirectChildOnly=False
 App.SupportsUniversalSleep=False
 App.WakeupMode=Any
 App.ApplicationReadyMode=RegexMatch
-
 Console.FilterMatchRegex=
 Console.FilterMatchReplacement=
 Console.ThrowawayMessageRegex=
@@ -102,7 +100,6 @@ Console.MetricsRegex=
 Console.SuppressLogAtStart=False
 Console.ActivateLogRegex=
 Console.UserActions={}
-
 Limits.SleepMode=False
 Limits.SleepOnStart=False
 Limits.SleepDelayMinutes=5
