@@ -2,7 +2,7 @@
     {
         "ConfigFile": "mongod.cfg",
         "AutoMap": true,
-        "ConfigType": "ini",
+        "ConfigType": "kvp",
         "ConfigFormat": "{0} = {1}",
         "ConfigFormatRegex": "^(?<key>\\S+)\\s*=\\s*(?<value>.*)$"
     }

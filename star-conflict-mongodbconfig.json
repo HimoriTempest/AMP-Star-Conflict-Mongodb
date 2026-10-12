@@ -7,7 +7,9 @@
         "Keywords": "bind ip address listen",
         "FieldName": "bind_ip",
         "InputType": "text",
+        "IsFlagArgument": false,
         "ParamFieldName": "bind_ip",
+        "IncludeInCommandLine": false,
         "DefaultValue": "127.0.0.1",
         "EnumValues": {}
     },
@@ -17,9 +19,12 @@
         "Subcategory": "Database:dns:1",
         "Description": "TCP port MongoDB listens on. Must match what Star Conflict services expect (default 27017).",
         "Keywords": "port mongodb database",
-        "FieldName": "port",
+        "FieldName": "$MongoPort",
         "InputType": "number",
+        "Hidden": true,
+        "IsFlagArgument": false,
         "ParamFieldName": "port",
+        "IncludeInCommandLine": false,
         "DefaultValue": "27017",
         "EnumValues": {}
     }

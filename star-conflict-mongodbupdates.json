@@ -10,7 +10,7 @@
         "UpdateStageName": "Download MongoDB 2.6.12 (Windows)",
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "FetchURL",
-        "UpdateSourceData": "https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-2.6.12.zip",
+        "UpdateSourceData": "https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-2.6.12.zip",
         "UpdateSourceTarget": "{{$FullBaseDir}}",
         "UpdateSourceArgs": "mongodb.zip",
         "UnzipUpdateSource": true,
@@ -23,7 +23,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"$src = Get-ChildItem -Directory -Filter 'mongodb-win32-*' | Select-Object -First 1; if ($src) { Copy-Item -Recurse -Force ($src.FullName + '\\*') '.'; Remove-Item -Recurse -Force $src.FullName }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -LiteralPath '{{$FullBaseDir}}'; $src = Get-ChildItem -Directory -Filter 'mongodb-win32-*' | Select-Object -First 1; if ($src) { Copy-Item -Recurse -Force ($src.FullName + '\\*') '.'; Remove-Item -Recurse -Force $src.FullName }\"",
         "SkipOnFailure": false
     },
     {
@@ -43,7 +43,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"src=$(ls -d mongodb-linux-x86_64-* 2>/dev/null | head -1); if [ -n \\\"$src\\\" ]; then cp -rf \\\"$src\\\"/* . && rm -rf \\\"$src\\\"; fi\"",
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullBaseDir}}\\\" || exit 1; src=$(ls -d mongodb-linux-x86_64-* 2>/dev/null | head -1); if [ -n \\\"$src\\\" ]; then cp -rf \\\"$src\\\"/* . && rm -rf \\\"$src\\\"; fi\"",
         "SkipOnFailure": false
     },
     {
@@ -51,7 +51,7 @@
         "UpdateSourcePlatform": "Windows",
         "UpdateSource": "Executable",
         "UpdateSourceData": "powershell.exe",
-        "UpdateSourceArgs": "-NoProfile -Command \"if (-not (Test-Path 'mongod.cfg')) { Set-Content -Path 'mongod.cfg' -Value 'bind_ip = 127.0.0.1`nport = 27017' }\"",
+        "UpdateSourceArgs": "-NoProfile -Command \"Set-Location -LiteralPath '{{$FullBaseDir}}'; if (-not (Test-Path 'mongod.cfg')) { Set-Content -Path 'mongod.cfg' -Value 'bind_ip = 127.0.0.1`nport = 27017' }\"",
         "SkipOnFailure": false
     },
     {
@@ -59,7 +59,7 @@
         "UpdateSourcePlatform": "Linux",
         "UpdateSource": "Executable",
         "UpdateSourceData": "/bin/bash",
-        "UpdateSourceArgs": "-c \"[ -f mongod.cfg ] || printf 'bind_ip = 127.0.0.1\\nport = 27017\\n' > mongod.cfg\"",
+        "UpdateSourceArgs": "-c \"cd \\\"{{$FullBaseDir}}\\\" || exit 1; [ -f mongod.cfg ] || printf 'bind_ip = 127.0.0.1\\nport = 27017\\n' > mongod.cfg\"",
         "SkipOnFailure": false
     }
 ]
